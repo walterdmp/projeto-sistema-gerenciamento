@@ -24,17 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "O campo nome é obrigatório.";
     }
 
+    // --- LÓGICA DE REDIRECIONAMENTO PARA O POP-UP ---
+
     if (empty($erros)) {
-        echo "<h3 style='color: green;'>Usuário validado!</h3>";
-        echo "<b>Nome:</b> $nome <br>";
-        echo "<b>Login:</b> $email <br>";
-        echo "<p>A senha foi confirmada e está segura.</p>";
+        // Sem erros: volta passando sucesso na URL
+        header("Location: form_usuario.html?status=sucesso");
+        exit();
     } else {
-        echo "<h3 style='color: red;'>Erro no cadastro:</h3><ul>";
-        foreach ($erros as $erro) {
-            echo "<li>$erro</li>";
-        }
-        echo "</ul><br><a href='form_usuario.html'>Voltar</a>";
+        // Com erros: volta passando erro na URL
+        header("Location: form_usuario.html?status=erro");
+        exit();
     }
 }
 ?>

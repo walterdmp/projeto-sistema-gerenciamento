@@ -2,51 +2,88 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BG Closet - Cadastro de Produto</title>
     <link rel="stylesheet" href="../../assets/css/estilo.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h2>Novo Produto</h2>
-    <form action="valida_produto.php" method="POST">
-        
-        <p>
-            <label>Nome / Descrição:</label><br>
-            <input type="text" name="nome_descricao" required maxlength="150"> </p>
 
-        <p>
-            <label>Categoria:</label><br>
-            <select name="categoria_produto" required>
-                <option value="">Selecione...</option>
-                <option value="Vestuário">Vestuário</option>
-                <option value="Perfumaria">Perfumaria</option>
-            </select>
-        </p>
+    <header class="main-header">
+        <div class="logo-container">
+            <span class="logo-bg">B & G</span> <span class="logo-closet">CLOSET</span>
+        </div>
+    </header>
 
-        <p>
-            <label>Marca:</label><br>
-            <input type="text" name="marca" maxlength="50">
-        </p>
+    <main class="main-content">
+        <div class="form-container">
+            <h2>Novo Produto</h2>
+            <form action="valida_produto.php" method="POST">
+                
+                <p>
+                    <label>Nome / Descrição:</label>
+                    <input type="text" name="nome_descricao" required maxlength="150"> 
+                </p>
 
-        <p>
-            <label>Tamanho (Deixe vazio para perfumes):</label><br>
-            <input type="text" name="tamanho" maxlength="10">
-        </p>
+                <p>
+                    <label>Categoria:</label>
+                    <select name="categoria_produto" required>
+                        <option value="">Selecione...</option>
+                        <option value="Vestuário">Vestuário</option>
+                        <option value="Perfumaria">Perfumaria</option>
+                    </select>
+                </p>
 
-        <p>
-            <label>Valor de Custo (R$):</label><br>
-            <input type="number" name="valor_custo" step="0.01" min="0" required> </p>
+                <p>
+                    <label>Marca:</label>
+                    <input type="text" name="marca" maxlength="50">
+                </p>
 
-        <p>
-            <label>Valor de Venda (R$):</label><br>
-            <input type="number" name="valor_venda" step="0.01" min="0" required>
-        </p>
+                <p>
+                    <label>Tamanho (Deixe vazio para perfumes):</label>
+                    <input type="text" name="tamanho" maxlength="10">
+                </p>
 
-        <p>
-            <label>Quantidade em Estoque:</label><br>
-            <input type="number" name="quantidade_estoque" min="0" required>
-        </p>
+                <p>
+                    <label>Valor de Custo (R$):</label>
+                    <input type="number" name="valor_custo" step="0.01" min="0" required> 
+                </p>
 
-        <button type="submit">Validar Dados</button>
-    </form>
+                <p>
+                    <label>Valor de Venda (R$):</label>
+                    <input type="number" name="valor_venda" step="0.01" min="0" required>
+                </p>
+
+                <p>
+                    <label>Quantidade em Estoque:</label>
+                    <input type="number" name="quantidade_estoque" min="0" required>
+                </p>
+
+                <button type="submit">Validar Dados</button>
+                <a href="../../index.html" class="voltar">Voltar ao Menu</a>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === 'sucesso') {
+            Swal.fire({
+                title: 'Sucesso!',
+                text: 'Produto cadastrado corretamente.',
+                icon: 'success',
+                confirmButtonColor: '#CFA863' // Bronze
+            });
+        } else if (status === 'erro') {
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Verifique os campos e tente novamente.',
+                icon: 'error',
+                confirmButtonColor: '#444f3e'
+            });
+        }
+    </script>
 </body>
 </html>

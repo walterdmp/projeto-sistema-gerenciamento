@@ -27,15 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "A quantidade em estoque deve ser um número válido.";
     }
 
+    // --- NOVA LÓGICA DE REDIRECIONAMENTO ---
+
     if (empty($erros)) {
-        echo "<h3>Produto validado com sucesso!</h3>";
-        echo "Pronto para ser processado pelo sistema.";
+        // Se não houver erros, volta para o formulário passando "?status=sucesso" na URL
+        header("Location: form_produto.html?status=sucesso");
+        exit(); // O exit garante que o PHP pare de processar imediatamente após o redirecionamento
     } else {
-        echo "<h3>Erros encontrados:</h3><ul>";
-        foreach ($erros as $erro) {
-            echo "<li style='color:red;'>$erro</li>";
-        }
-        echo "</ul><br><a href='form_produto.html'>Voltar</a>";
+        // Se houver erros, volta para o formulário passando "?status=erro" na URL
+        header("Location: form_produto.html?status=erro");
+        exit();
     }
 }
 ?>

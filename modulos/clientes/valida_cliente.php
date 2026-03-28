@@ -1,4 +1,3 @@
-
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,16 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "O telefone deve conter apenas números e símbolos de formatação.";
     }
 
+    // --- NOVA LÓGICA DE REDIRECIONAMENTO ---
+
     if (count($erros) == 0) {
-        echo "<h3 style='color: green;'>Dados da cliente validados com sucesso!</h3>";
-        echo "<b>Nome:</b> $nome <br>";
-        echo "<b>Telefone:</b> $telefone";
+        // Sem erros: volta passando sucesso na URL
+        header("Location: form_cliente.html?status=sucesso");
+        exit();
     } else {
-        echo "<h3 style='color: red;'>Falha na validação:</h3><ul>";
-        foreach ($erros as $erro) {
-            echo "<li>$erro</li>";
-        }
-        echo "</ul><br><a href='form_cliente.html'>Voltar e corrigir</a>";
+        // Com erros: volta passando erro na URL
+        header("Location: form_cliente.html?status=erro");
+        exit();
     }
 }
 ?>

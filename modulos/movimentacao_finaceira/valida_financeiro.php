@@ -25,18 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "A data é obrigatória.";
     }
 
+    // --- LÓGICA DE REDIRECIONAMENTO PARA O POP-UP ---
+
     if (empty($erros)) {
-        echo "<h3 style='color: blue;'>Movimentação Financeira Validada!</h3>";
-        echo "<b>Descrição:</b> $descricao <br>";
-        echo "<b>Tipo:</b> " . ($tipo == "SAIDA" ? "Despesa (-)" : "Entrada (+)") . "<br>";
-        echo "<b>Valor:</b> R$ " . number_format($valor, 2, ',', '.') . "<br>";
-        echo "<b>Data:</b> " . date('d/m/Y', strtotime($data));
+        // Redireciona com sucesso
+        header("Location: form_financeiro.html?status=sucesso");
+        exit();
     } else {
-        echo "<h3 style='color: red;'>Erro no lançamento:</h3><ul>";
-        foreach ($erros as $erro) {
-            echo "<li>$erro</li>";
-        }
-        echo "</ul><br><a href='form_financeiro.html'>Voltar</a>";
+        // Redireciona com erro
+        header("Location: form_financeiro.html?status=erro");
+        exit();
     }
 }
 ?>

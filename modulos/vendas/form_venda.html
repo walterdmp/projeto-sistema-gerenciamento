@@ -2,39 +2,74 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BG Closet - Registrar Venda</title>
     <link rel="stylesheet" href="../../assets/css/estilo.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <h2>Registrar Venda</h2>
-    <form action="valida_venda.php" method="POST">
-        
-        <p>
-            <label>ID da Cliente (ou Nome):</label><br>
-            <input type="text" name="cliente_id" required placeholder="Ex: Maria Silva">
-        </p>
 
-        <p>
-            <label>Data da Venda:</label><br>
-            <input type="date" name="data_venda" required>
-        </p>
+    <header class="main-header">
+        <div class="logo-container">
+            <span class="logo-bg">B & G</span> <span class="logo-closet">CLOSET</span>
+        </div>
+    </header>
 
-        <p>
-            <label>Valor Total da Venda (R$):</label><br>
-            <input type="number" name="valor_total" step="0.01" min="0.01" required>
-        </p>
+    <main class="main-content">
+        <div class="form-container">
+            <h2>Registrar Venda</h2>
+            <form action="valida_venda.php" method="POST">
+                
+                <p>
+                    <label>ID da Cliente (ou Nome):</label>
+                    <input type="text" name="cliente_id" required placeholder="Ex: Maria Silva">
+                </p>
 
-        <p>
-            <label>Status do Pagamento:</label><br>
-            <select name="status_pagamento" required>
-                <option value="">Selecione...</option>
-                <option value="Pago">Pago (À vista/PIX)</option>
-                <option value="Pendente">Pendente (Fiado)</option>
-                <option value="Cancelado">Cancelado</option>
-            </select>
-        </p>
+                <p>
+                    <label>Data da Venda:</label>
+                    <input type="date" name="data_venda" required>
+                </p>
 
-        <button type="submit">Finalizar Registro</button>
-    </form>
+                <p>
+                    <label>Valor Total da Venda (R$):</label>
+                    <input type="number" name="valor_total" step="0.01" min="0.01" required>
+                </p>
+
+                <p>
+                    <label>Status do Pagamento:</label>
+                    <select name="status_pagamento" required>
+                        <option value="">Selecione...</option>
+                        <option value="Pago">Pago (À vista/PIX)</option>
+                        <option value="Pendente">Pendente (Fiado)</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </p>
+
+                <button type="submit">Finalizar Registro</button>
+                <a href="../../index.html" class="voltar">Voltar ao Menu</a>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === 'sucesso') {
+            Swal.fire({
+                title: 'Venda Registrada!',
+                text: 'A venda foi validada e processada com sucesso no sistema.',
+                icon: 'success',
+                confirmButtonColor: '#CFA863' // Bronze
+            });
+        } else if (status === 'erro') {
+            Swal.fire({
+                title: 'Erro no Registro!',
+                text: 'Verifique se a data não é futura, se o valor é positivo e tente novamente.',
+                icon: 'error',
+                confirmButtonColor: '#444f3e'
+            });
+        }
+    </script>
 </body>
 </html>

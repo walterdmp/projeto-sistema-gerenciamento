@@ -2,50 +2,97 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BG Closet - Movimentação Financeira</title>
     <link rel="stylesheet" href="../../assets/css/estilo.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Ajuste específico para os botões de rádio ficarem alinhados no novo layout */
+        fieldset { border: 1px solid var(--color-border); padding: 15px; border-radius: 4px; margin-bottom: 15px; }
+        legend { color: var(--color-dark-gray); font-weight: bold; padding: 0 5px; }
+        .radio-group { display: flex; gap: 20px; margin-top: 10px; }
+        .radio-group label { margin-bottom: 0; font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .radio-group input[type="radio"] { width: auto; }
+    </style>
 </head>
 <body>
-    <h2>Lançamento de Caixa</h2>
-    <form action="valida_financeiro.php" method="POST">
-        
-        <p>
-            <label>Descrição do Lançamento:</label><br>
-            <input type="text" name="descricao" required placeholder="Ex: Combustível viagem SP" maxlength="200">
-        </p>
 
-        <p>
-            <label>Categoria:</label><br>
-            <select name="categoria" required>
-                <option value="">Selecione...</option>
-                <option value="Viagem">Logística/Viagem</option>
-                <option value="Embalagem">Embalagens</option>
-                <option value="Fornecedor">Pagamento Fornecedor</option>
-                <option value="Outros">Outros</option>
-            </select>
-        </p>
+    <header class="main-header">
+        <div class="logo-container">
+            <span class="logo-bg">B & G</span> <span class="logo-closet">CLOSET</span>
+        </div>
+    </header>
 
-        <p>
-            <label>Valor (R$):</label><br>
-            <input type="number" name="valor" step="0.01" min="0.01" required>
-        </p>
+    <main class="main-content">
+        <div class="form-container">
+            <h2>Lançamento de Caixa</h2>
+            <form action="valida_financeiro.php" method="POST">
+                
+                <p>
+                    <label>Descrição do Lançamento:</label>
+                    <input type="text" name="descricao" required placeholder="Ex: Combustível viagem SP" maxlength="200">
+                </p>
 
-        <p>
-            <label>Data da Ocorrência:</label><br>
-            <input type="date" name="data_movimentacao" required>
-        </p>
+                <p>
+                    <label>Categoria:</label>
+                    <select name="categoria" required>
+                        <option value="">Selecione...</option>
+                        <option value="Viagem">Logística/Viagem</option>
+                        <option value="Embalagem">Embalagens</option>
+                        <option value="Fornecedor">Pagamento Fornecedor</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </p>
 
-        <fieldset>
-            <legend>Tipo de Movimentação</legend>
-            <input type="radio" id="saida" name="tipo" value="SAIDA" checked>
-            <label for="saida">Saída (Despesa)</label><br>
-            
-            <input type="radio" id="entrada" name="tipo" value="ENTRADA">
-            <label for="entrada">Entrada (Aporte/Extra)</label>
-        </fieldset>
+                <p>
+                    <label>Valor (R$):</label>
+                    <input type="number" name="valor" step="0.01" min="0.01" required>
+                </p>
 
-        <br>
-        <button type="submit">Registar Movimentação</button>
-    </form>
+                <p>
+                    <label>Data da Ocorrência:</label>
+                    <input type="date" name="data_movimentacao" required>
+                </p>
+
+                <fieldset>
+                    <legend>Tipo de Movimentação</legend>
+                    <div class="radio-group">
+                        <label for="saida">
+                            <input type="radio" id="saida" name="tipo" value="SAIDA" checked>
+                            Saída (Despesa)
+                        </label>
+                        <label for="entrada">
+                            <input type="radio" id="entrada" name="tipo" value="ENTRADA">
+                            Entrada (Aporte/Extra)
+                        </label>
+                    </div>
+                </fieldset>
+
+                <button type="submit">Registar Movimentação</button>
+                <a href="../../index.html" class="voltar">Voltar ao Menu</a>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+
+        if (status === 'sucesso') {
+            Swal.fire({
+                title: 'Lançamento Registado!',
+                text: 'A movimentação financeira foi guardada com sucesso.',
+                icon: 'success',
+                confirmButtonColor: '#CFA863' // Bronze
+            });
+        } else if (status === 'erro') {
+            Swal.fire({
+                title: 'Erro no Lançamento!',
+                text: 'Verifique se preencheu corretamente a descrição, a categoria e o valor.',
+                icon: 'error',
+                cconfirmButtonColor: '#444f3e'
+            });
+        }
+    </script>
 </body>
 </html>

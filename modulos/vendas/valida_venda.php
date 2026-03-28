@@ -25,18 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erros[] = "O status do pagamento deve ser informado.";
     }
 
+    // --- LÓGICA DE REDIRECIONAMENTO PARA O POP-UP ---
+
     if (empty($erros)) {
-        echo "<h3 style='color: green;'>Venda validada com sucesso!</h3>";
-        echo "<b>Cliente:</b> $cliente <br>";
-        echo "<b>Data:</b> " . date('d/m/Y', strtotime($data_venda)) . "<br>";
-        echo "<b>Total:</b> R$ " . number_format($valor, 2, ',', '.') . "<br>";
-        echo "<b>Status:</b> $status";
+        // Redireciona de volta passando o sucesso
+        header("Location: form_venda.html?status=sucesso");
+        exit();
     } else {
-        echo "<h3 style='color: red;'>Erros na Venda:</h3><ul>";
-        foreach ($erros as $erro) {
-            echo "<li>$erro</li>";
-        }
-        echo "</ul><br><a href='form_venda.html'>Voltar</a>";
+        // Redireciona de volta passando o erro
+        header("Location: form_venda.html?status=erro");
+        exit();
     }
 }
 ?>
