@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>BG Closet - Cadastro de Clientes</title>
+    <link rel="stylesheet" href="../../assets/css/estilo.css">
+</head>
+<body>
+    <h2>Cadastrar Nova Cliente</h2>
+    <form action="valida_cliente.php" method="POST">
+        
+        <p>
+            <label>Nome Completo:</label><br>
+            <input type="text" name="nome" required maxlength="100" placeholder="Digite o nome da cliente">
+        </p>
+
+        <p>
+            <label>Telefone / WhatsApp:</label><br>
+            <input type="tel" name="telefone" required maxlength="20" placeholder="(35) 99999-9999">
+        </p>
+
+        <button type="submit">Verificar Cadastro</button>
+    </form>
+</body>
+</html>

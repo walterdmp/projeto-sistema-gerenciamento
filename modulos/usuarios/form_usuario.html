@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>BG Closet - Cadastro de Usuário</title>
+    <link rel="stylesheet" href="../../assets/css/estilo.css">
+</head>
+<body>
+    <h2>Cadastrar Gestor do Sistema</h2>
+    <form action="valida_usuario.php" method="POST">
+        
+        <p>
+            <label>Nome Completo:</label><br>
+            <input type="text" name="nome" required maxlength="100">
+        </p>
+
+        <p>
+            <label>E-mail de Acesso:</label><br>
+            <input type="email" name="email" required>
+        </p>
+
+        <p>
+            <label>Senha:</label><br>
+            <input type="password" name="senha" required minlength="6">
+        </p>
+
+        <p>
+            <label>Confirmar Senha:</label><br>
+            <input type="password" name="confirma_senha" required>
+        </p>
+
+        <button type="submit">Criar Conta</button>
+    </form>
+</body>
+</html>

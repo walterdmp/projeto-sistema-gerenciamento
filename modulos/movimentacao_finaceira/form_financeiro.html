@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>BG Closet - Movimentação Financeira</title>
+    <link rel="stylesheet" href="../../assets/css/estilo.css">
+</head>
+<body>
+    <h2>Lançamento de Caixa</h2>
+    <form action="valida_financeiro.php" method="POST">
+        
+        <p>
+            <label>Descrição do Lançamento:</label><br>
+            <input type="text" name="descricao" required placeholder="Ex: Combustível viagem SP" maxlength="200">
+        </p>
+
+        <p>
+            <label>Categoria:</label><br>
+            <select name="categoria" required>
+                <option value="">Selecione...</option>
+                <option value="Viagem">Logística/Viagem</option>
+                <option value="Embalagem">Embalagens</option>
+                <option value="Fornecedor">Pagamento Fornecedor</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </p>
+
+        <p>
+            <label>Valor (R$):</label><br>
+            <input type="number" name="valor" step="0.01" min="0.01" required>
+        </p>
+
+        <p>
+            <label>Data da Ocorrência:</label><br>
+            <input type="date" name="data_movimentacao" required>
+        </p>
+
+        <fieldset>
+            <legend>Tipo de Movimentação</legend>
+            <input type="radio" id="saida" name="tipo" value="SAIDA" checked>
+            <label for="saida">Saída (Despesa)</label><br>
+            
+            <input type="radio" id="entrada" name="tipo" value="ENTRADA">
+            <label for="entrada">Entrada (Aporte/Extra)</label>
+        </fieldset>
+
+        <br>
+        <button type="submit">Registar Movimentação</button>
+    </form>
+</body>
+</html>
