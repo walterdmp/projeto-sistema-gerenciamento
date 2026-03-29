@@ -121,9 +121,19 @@ button[type="submit"]:active {
 }
 
 /* Menu Principal (index) */
-.menu-list { list-style: none; padding: 0; margin-top: 20px; }
-.menu-list li { margin: 15px 0; }
-.menu-list a {
+.menu-list { 
+    list-style: none; /* Tira as bolinhas (pontos) da lista */
+    padding: 0; 
+    margin-top: 20px; 
+}
+
+.menu-list li { 
+    margin: 15px 0; 
+}
+
+/* Garante que o botão normal e o já clicado (visited) fiquem com o fundo branco */
+.menu-list a, 
+.menu-list a:visited {
     display: block;
     background-color: var(--color-bg-white); 
     color: var(--color-verde-escuro);              
@@ -135,11 +145,21 @@ button[type="submit"]:active {
     font-weight: bold;
     text-transform: uppercase;
     border: 2px solid var(--color-verde-escuro);
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
 }
-.menu-list a:hover {
+
+/* Garante que só fique verde escuro ao passar o rato (hover) ou no momento do clique (active) */
+.menu-list a:hover,
+.menu-list a:active {
     background-color: var(--color-verde-escuro);    
     color: var(--color-bg-white);            
+}
+
+/* Remove a linha de seleção que o navegador às vezes deixa "presa" após o clique */
+.menu-list a:focus {
+    outline: none;
+    /* Adiciona uma sombra suave em vez de ficar totalmente verde se selecionado pelo teclado */
+    box-shadow: 0 0 0 3px rgba(117, 128, 111, 0.3); 
 }
 
 /* Links em geral */
